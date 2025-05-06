@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      spicy-icon_0: 9046127515110934852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

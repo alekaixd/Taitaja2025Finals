@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CARD-spicy_0: 8145709926883686758
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

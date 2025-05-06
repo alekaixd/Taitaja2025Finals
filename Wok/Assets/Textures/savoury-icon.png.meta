@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      savoury-icon_0: 4584977604554050479
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
