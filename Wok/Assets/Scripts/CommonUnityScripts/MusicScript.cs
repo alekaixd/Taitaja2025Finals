@@ -18,12 +18,6 @@ public class MusicScript : MonoBehaviour
     }
     void Start()
     {
-        // Try to find the InfoContainer
-        infoContainer = GameObject.Find("InfoContainer").GetComponent<InfoContainer>();
-        if (infoContainer == null)
-        {
-            throw new System.Exception("InfoContainer not found.");
-        }
         
         
         if (SceneManager.GetActiveScene().buildIndex == 0) // Get setting manager if in main menu
@@ -35,7 +29,7 @@ public class MusicScript : MonoBehaviour
 
         }
         CurrentSong.volume = MusicVolume / 100 * (MasterVolume / 100);
-        HitSounds.volume = HitsoundVolume / 100 * (MasterVolume / 100);
+        //HitSounds.volume = HitsoundVolume / 100 * (MasterVolume / 100);
         UpdateVolume();
     }
     // This script handles only ingame audio, not editor audio, because the application of the editor is a lot different to what this provides
