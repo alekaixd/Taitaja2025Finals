@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: e0e6ee192e9636248aa63603923932b8
+guid: 6a6d0fd63f9f9db4096efb7bf4febcf2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7495754254989068931
-    second: sweet-icon_0
+      213: 5357575813989033364
+    second: sour-icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sweet-icon_0
+      name: sour-icon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 400
-        height: 600
+        x: 52
+        y: 451
+        width: 96
+        height: 98
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38a0f3cd7c4460860800000000000000
-      internalID: 7495754254989068931
+      spriteID: 4956a0231dee95a40800000000000000
+      internalID: 5357575813989033364
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9b4f0945ca8e4384e975627ab8ecdb6e
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sweet-icon_0: 7495754254989068931
+      sour-icon_0: 5357575813989033364
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

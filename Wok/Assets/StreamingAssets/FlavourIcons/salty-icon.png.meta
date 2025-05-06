@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: e0e6ee192e9636248aa63603923932b8
+guid: b30e82e92ac9d2b45b7726806056ff5d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7495754254989068931
-    second: sweet-icon_0
+      213: 9086347142206404836
+    second: salt-icon_0
+  - first:
+      213: -2251239985372129167
+    second: salt-icon_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: sweet-icon_0
+      name: salt-icon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 400
-        height: 600
+        x: 33
+        y: 431
+        width: 147
+        height: 123
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 38a0f3cd7c4460860800000000000000
-      internalID: 7495754254989068931
+      spriteID: 4e839159590391e70800000000000000
+      internalID: 9086347142206404836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: salt-icon_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 443
+        width: 37
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1781dbf292df1c0e0800000000000000
+      internalID: -2251239985372129167
       vertices: []
       indices: 
       edges: []
@@ -138,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 9b4f0945ca8e4384e975627ab8ecdb6e
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      sweet-icon_0: 7495754254989068931
+      salt-icon_0: 9086347142206404836
+      salt-icon_1: -2251239985372129167
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
