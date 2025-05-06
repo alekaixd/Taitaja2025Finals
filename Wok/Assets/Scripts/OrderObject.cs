@@ -1,16 +1,18 @@
 using UnityEngine;
 
-public class OrderObject : MonoBehaviour
+[CreateAssetMenu(fileName = "OrderObject", menuName = "OrderObjects/Order", order = 1)]
+public class OrderObject : ScriptableObject
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public string orderDescription;
+    public OrderRequirement orderRequirement = new();
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+[System.Serializable]
+public class OrderRequirement
+{
+    public int spiceRequired;
+    public int sweetnessRequired;
+    public int sournessRequired;
+    public int bitternessRequired;
+    public int saltynessRequired;
 }
