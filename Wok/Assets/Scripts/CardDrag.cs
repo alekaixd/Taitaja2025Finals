@@ -12,7 +12,7 @@ public class CardDrag : MonoBehaviour
     // Remember to use the new Input System for mouse input
     public bool isHovered;
     public Vector2 defaultPosition;
-    public Vector2 DefaultScale;
+    public Vector3 DefaultScale;
     public Vector2 MousePosition;
     public GameManager gameManager;
     public MenuScript menuScript;
@@ -20,7 +20,8 @@ public class CardDrag : MonoBehaviour
     public float PopupHeight = 50f; // Height to pop up when scaling
     public float scalespeed = 0.1f; // Speed of scaling
     public bool isDragged = false; // Flag to check if the card is being dragged
-    public Vector3 scaleSize = new Vector3(1.1f,1.1f,1.1f); // Size to scale to
+    public Vector3 scaleSize = new (); // Size to scale to
+    public float HoverDelay = 0.1f; // Delay before the card pops up
 
     void Start()
     {
@@ -30,7 +31,7 @@ public class CardDrag : MonoBehaviour
     {
         menuScript = FindFirstObjectByType<MenuScript>();
         gameManager = FindFirstObjectByType<GameManager>();
-        DefaultScale = transform.localScale;
+        DefaultScale = Vector3.one;
     }
     void OnMouseEnter()
     {
@@ -38,8 +39,14 @@ public class CardDrag : MonoBehaviour
         {
             isHovered = true;
             StopAllCoroutines();
-            StartCoroutine(ScaleTo(scaleSize, scalespeed, PopupSpeed, true));
+            StartCoroutine(HoverWithDelay());
         }
+    }
+
+    IEnumerator HoverWithDelay()
+    {
+        yield return new WaitForSeconds(HoverDelay); // Add delay before scaling
+        StartCoroutine(ScaleTo(scaleSize, scalespeed * 2, PopupSpeed * 2, true)); // Make scaling slower
     }
 
     void OnMouseExit()
@@ -48,7 +55,7 @@ public class CardDrag : MonoBehaviour
         {
             isHovered = false;
             StopAllCoroutines();
-            StartCoroutine(ScaleTo(scaleSize, scalespeed, PopupSpeed, false));
+            StartCoroutine(ScaleTo(scaleSize, scalespeed * 2, PopupSpeed * 2, false)); // Make scaling slower
         }
     }
 
@@ -92,17 +99,33 @@ public class CardDrag : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (isHovered) // Only allow dragging if hovered
+        if (isHovered && gameManager.draggingCard == false) // Only allow dragging if hovered
         {
             isDragged = true;
+            gameManager.draggingCard = true;
         }
     }
 
     void OnMouseUp()
     {
         isDragged = false;
+        gameManager.draggingCard = false;
     }
     bool returningToDefaultPos;
+
+    void ReturnToDefaultPosition()
+    {
+        if (Mathf.Approximately(transform.position.x, defaultPosition.x))
+        {
+            // Is at default pos
+            returningToDefaultPos = false;
+        }
+        else
+        {
+            returningToDefaultPos = true;
+            transform.position = Vector3.Lerp(transform.position, defaultPosition, 1f);
+        }
+    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -143,15 +166,7 @@ public class CardDrag : MonoBehaviour
         }
         else if (!isDragged)
         {
-            if (Mathf.Approximately(transform.position.x, defaultPosition.x) || Mathf.Approximately(transform.position.y, defaultPosition.y))
-            {
-                returningToDefaultPos = true;
-            }
-            else {
-                returningToDefaultPos = false;
-            }
-            // Lerp back to the default position when not dragging and not hovered
-            transform.position = Vector3.Lerp(transform.position, defaultPosition, 0.1f);
+            ReturnToDefaultPosition();
         }
     }
 

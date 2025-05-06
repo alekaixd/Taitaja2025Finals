@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public int maxHandSize = 5;
     public int handSize = 0;
+    public bool draggingCard;
+    public float cardGap;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +39,8 @@ public class GameManager : MonoBehaviour
         cardDrag.gameManager = this;
         cardDrag.menuScript = GameObject.Find("MenuManager").GetComponent<MenuScript>();
         handCards.Add(cardObject);
+        OrganiseHand();
+        cardDrag.defaultPosition = cardObject.transform.position;
         CardClass cardClass = cardObject.GetComponent<CardClass>();
         cardClass.SetFoodName(card.foodName);
         foreach (FlavourClass flavour in card.flavourClass)
@@ -45,6 +49,24 @@ public class GameManager : MonoBehaviour
         }
         cardClass.InitializeCard();
         handSize++;
+    }
+    void OrganiseHand()
+    {
+        int currentCard = 1;
+        foreach (GameObject card in handCards)
+        {
+            card.transform.localPosition = new Vector3 (currentCard switch 
+            {
+                1 => -cardGap*2,
+                2 => -cardGap,
+                3 => 0f,
+                4 => cardGap,
+                5 => cardGap*2,
+                _ => 0f
+                
+            },0 );
+            currentCard += 1;
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
