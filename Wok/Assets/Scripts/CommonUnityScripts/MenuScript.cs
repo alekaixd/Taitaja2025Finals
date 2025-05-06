@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 
 public class MenuScript : MonoBehaviour
 {
@@ -49,10 +50,7 @@ public class MenuScript : MonoBehaviour
     {
 
     }
-    public InputAction.CallbackContext MouseState;
-    public void MousePress(InputAction.CallbackContext context)
-    {
-        Debug.Log("Mouse state: " + context.phase);
-        MouseState = context;
-    }
+    public bool mousePressed;
+    public bool startedMousePress;
+    public bool canceledMousePress;
 }

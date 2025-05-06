@@ -14,12 +14,14 @@ public class CardDrag : MonoBehaviour
     public Vector2 defaultPosition;
     public Vector2 DefaultScale;
     public Vector2 MousePosition;
-    public GameManager gameManager;     public MenuScript menuScript;
+    public GameManager gameManager;
+    public MenuScript menuScript;
     public float PopupSpeed = 0.1f;
     public float PopupHeight = 50f; // Height to pop up when scaling
     public float scalespeed = 0.1f; // Speed of scaling
     public bool isDragged = false; // Flag to check if the card is being dragged
     public Vector3 scaleSize = new Vector3(1.1f,1.1f,1.1f); // Size to scale to
+
     void Start()
     {
         
@@ -55,10 +57,13 @@ public class CardDrag : MonoBehaviour
         Vector3 initialScale = transform.localScale;
         Vector3 initialPosition = transform.position;
         Vector3 targetPosition = moveUp ? new Vector3(initialPosition.x, defaultPosition.y + PopupHeight, initialPosition.z) : new Vector3(initialPosition.x, defaultPosition.y, initialPosition.z);
-
+        if (returningToDefaultPos)
+        {
+            yield return null;
+        }
         float elapsed = 0f;
 
-        while (elapsed < expandspeed)
+        while (elapsed < 1)
         {
             transform.localScale = new Vector3(
                 Mathf.Lerp(initialScale.x, targetScale.x, elapsed / expandspeed),
@@ -70,12 +75,13 @@ public class CardDrag : MonoBehaviour
                 transform.position = new Vector3(
                     Mathf.Lerp(initialPosition.x, targetPosition.x, elapsed / PopupSpeed),
                     Mathf.Lerp(initialPosition.y, targetPosition.y, elapsed / PopupSpeed),
-                    initialPosition.z);
+                    1f);
             }
 
             elapsed += Time.deltaTime;
-            yield return null;
+            
         }
+        yield return null;
 
         transform.localScale = targetScale;
         if (moveUp || (!moveUp && isHovered == false)) // Finalize position only if unhovering
@@ -96,6 +102,7 @@ public class CardDrag : MonoBehaviour
     {
         isDragged = false;
     }
+    bool returningToDefaultPos;
 
     // Update is called once per frame
     void FixedUpdate()
@@ -120,11 +127,11 @@ public class CardDrag : MonoBehaviour
                 OnMouseExit();
             }
         }
-        if (menuScript.MouseState.started)
+        if (Input.GetMouseButton(0))
         {
             OnMouseDown();
         }
-        else if (menuScript.MouseState.canceled)
+        else if (!Input.GetMouseButton(0))
         {
             OnMouseUp();
         }
@@ -134,10 +141,17 @@ public class CardDrag : MonoBehaviour
             mousePosition.z = 0; // Ensure the object stays in the same plane
             transform.position = mousePosition;
         }
-        else if (!isHovered) // Only lerp back to default position if not hovered
+        else if (!isDragged)
         {
+            if (Mathf.Approximately(transform.position.x, defaultPosition.x) || Mathf.Approximately(transform.position.y, defaultPosition.y))
+            {
+                returningToDefaultPos = true;
+            }
+            else {
+                returningToDefaultPos = false;
+            }
             // Lerp back to the default position when not dragging and not hovered
-            transform.position = Vector3.Lerp(transform.position, defaultPosition, PopupSpeed);
+            transform.position = Vector3.Lerp(transform.position, defaultPosition, 0.1f);
         }
     }
 

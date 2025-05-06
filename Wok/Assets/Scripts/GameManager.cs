@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour
     {
         // Adds a card to the hand
         GameObject cardObject = Instantiate(CardPrefab, hand.transform);
+        CardDrag cardDrag = cardObject.GetComponent<CardDrag>();
+        cardDrag.gameManager = this;
+        cardDrag.menuScript = GameObject.Find("MenuManager").GetComponent<MenuScript>();
         handCards.Add(cardObject);
         CardClass cardClass = cardObject.GetComponent<CardClass>();
         cardClass.SetFoodName(card.foodName);
