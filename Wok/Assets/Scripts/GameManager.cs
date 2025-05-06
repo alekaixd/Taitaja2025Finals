@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public Vector2 MousePosition;
     public GameObject CardPrefab;
-    public List<CardClass> Deck = new();
+    public List<CardObject> Deck = new();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,6 +20,18 @@ public class GameManager : MonoBehaviour
     {
         // Adds a card to the deck
     }
+
+    public void addCardToHand(CardObject card)
+    {
+        // Adds a card to the hand
+        GameObject cardObject = Instantiate(CardPrefab, transform);
+        CardClass cardClass = cardObject.GetComponent<CardClass>();
+        cardClass.SetFoodName(card.foodName);
+        foreach (FlavourClass flavour in card.flavourClass)
+        {
+            cardClass.flavourClass.Add(flavour);
+        }
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -28,23 +40,31 @@ public class GameManager : MonoBehaviour
 }
     public enum CardFlavor
     {
-        Spicy = 0,
-        Sweet = 1,
-        Sour = 2,
-        Savoury = 3,
-        Salty = 4,
+        None = 0,
+        Spicy = 1,
+        Sweet = 2,
+        Sour = 3,
+        Savoury = 4,
+        Salty = 5,
     }
 
-    public class FlavourClass
+[System.Serializable]
+public class FlavourClass
+{
+    public CardFlavor Flavor;
+    public int FlavourValue;
+    public FlavourClass(CardFlavor flavor, int flavourValue)
     {
-        public CardFlavor Flavor;
-        public int FlavourValue;
-        public FlavourClass(CardFlavor flavor, int flavourValue)
-        {
-            Flavor = flavor;
-            FlavourValue = flavourValue;
-        }
+        Flavor = flavor;
+        FlavourValue = flavourValue;
     }
+
+    public int GetFlavourIndex()
+    {
+        return (int)Flavor;
+    }
+}
+
     public class FlavourBuffClass
     {
         CardFlavor Flavor;
