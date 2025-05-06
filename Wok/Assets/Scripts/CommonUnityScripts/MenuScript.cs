@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class MenuScript : MonoBehaviour
 {
     public MusicScript musicScript;
-    public InfoContainer infoContainer;
     void Start()
     {
     }
@@ -29,10 +28,9 @@ public class MenuScript : MonoBehaviour
         
     }
 
-    public void Resume()
+    public void StartGame()
     {
-        
-        musicScript.ResumeMusic();
+        SceneManager.LoadScene("GameScene");
     }
 
 
