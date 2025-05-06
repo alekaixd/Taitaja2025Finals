@@ -9,34 +9,52 @@ public class GameManager : MonoBehaviour
     public Vector2 MousePosition;
     public GameObject CardPrefab;
     public List<CardObject> Deck = new();
-    
+    public GameObject hand;
+    public List<GameObject> handCards = new();
+
+    public int maxHandSize = 5;
+    public int handSize = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
-    
-    void AddCardToDeck()
+
+
+    public void RemoveCardFromHand(CardClass card)
     {
-        // Adds a card to the deck
+        // Removes a card from the hand (unfinished)
+        Destroy(card.gameObject);
+        handSize--;
     }
 
     public void addCardToHand(CardObject card)
     {
         // Adds a card to the hand
-        GameObject cardObject = Instantiate(CardPrefab, transform);
+        GameObject cardObject = Instantiate(CardPrefab, hand.transform);
+        handCards.Add(cardObject);
         CardClass cardClass = cardObject.GetComponent<CardClass>();
         cardClass.SetFoodName(card.foodName);
         foreach (FlavourClass flavour in card.flavourClass)
         {
             cardClass.flavourClass.Add(flavour);
         }
+        cardClass.InitializeCard();
+        handSize++;
     }
     // Update is called once per frame
     void FixedUpdate()
     {
         MousePosition = Mouse.current.position.ReadValue();
+
+        if (handSize < maxHandSize)
+        {
+            addCardToHand(Deck[Random.Range(0, Deck.Count)]);
+        }
     }
+
+
 }
     public enum CardFlavor
     {

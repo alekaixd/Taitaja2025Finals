@@ -25,7 +25,7 @@ public class CardClass : MonoBehaviour
         flavourClass.Add(flavour);
     }
 
-    public void Awake()
+    public void InitializeCard()
     {
         foodNameText.text = foodName;
         foreach (FlavourClass flavour in flavourClass)
