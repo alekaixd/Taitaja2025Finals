@@ -39,6 +39,18 @@ public class CardDrag : MonoBehaviour
     public IEnumerator ScaleTo(Vector3 targetScale, float duration)
     {
         Vector3 initialScale = transform.localScale;
+        Vector3 initialPosition = transform.position;
+        Vector3 targetPosition = initialPosition;
+
+        if (targetScale.y > initialScale.y) // Scaling up
+        {
+            targetPosition.y += 50f;
+        }
+        else // Scaling down
+        {
+            targetPosition.y -= 50f;
+        }
+
         float elapsed = 0f;
 
         while (elapsed < duration)
@@ -47,12 +59,20 @@ public class CardDrag : MonoBehaviour
                 Mathf.Lerp(initialScale.x, targetScale.x, elapsed / duration),
                 Mathf.Lerp(initialScale.y, targetScale.y, elapsed / duration),
                 1f);
+
+            transform.position = new Vector3(
+                Mathf.Lerp(initialPosition.x, targetPosition.x, elapsed / duration),
+                Mathf.Lerp(initialPosition.y, targetPosition.y, elapsed / duration),
+                initialPosition.z);
+
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.localScale = targetScale;
+        transform.position = targetPosition;
     }
+
     private bool isDragging = false;
 
     void OnMouseDown()

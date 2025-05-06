@@ -37,8 +37,8 @@ public class GameManager : MonoBehaviour
 
     public class FlavourClass
     {
-        CardFlavor Flavor;
-        int FlavourValue;
+        public CardFlavor Flavor;
+        public int FlavourValue;
         public FlavourClass(CardFlavor flavor, int flavourValue)
         {
             Flavor = flavor;
