@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class MusicScript : MonoBehaviour
 {
-    public AudioSource CurrentSong, HissSounds, ButtonTap, ButtonLift;
-    public float MasterVolume, songPosition;
+    public AudioSource CurrentSong, HissSounds, ButtonTap, ButtonLift, SizzleFX;
+    public float MasterVolume, sfxValue = 0.1f, songPosition;
     private InfoContainer infoContainer;
     void Awake()
     {
@@ -15,8 +15,8 @@ public class MusicScript : MonoBehaviour
     }
     void Start()
     {
-        MasterVolume = infoContainer.MasterVolume;
-        CurrentSong.volume = infoContainer.MasterVolume;
+        MasterVolume = infoContainer.MasterVolume / 100f;
+        CurrentSong.volume = MasterVolume/ 100f;
         //HitSounds.volume = HitsoundVolume / 100 * (MasterVolume / 100);
         UpdateVolume();
     }
@@ -123,6 +123,14 @@ public class MusicScript : MonoBehaviour
     /// </summary>
     public void UpdateVolume()
     {
-        CurrentSong.volume = MasterVolume;
+        CurrentSong.volume = MasterVolume/100;
+        if (SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            HissSounds.volume = MasterVolume*sfxValue;
+            ButtonTap.volume = MasterVolume*sfxValue;
+            ButtonLift.volume = MasterVolume*sfxValue;
+            SizzleFX.volume = MasterVolume*sfxValue;
+        }
+        
     }
 }

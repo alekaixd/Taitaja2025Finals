@@ -61,7 +61,7 @@ public class PotScript : MonoBehaviour
         if (isHovered && gameManager.draggingCard)
         {
             hoverTime += Time.fixedDeltaTime; // Increment hover time while hovering
-            if (hoverTime >= 0.5f && !Input.GetMouseButton(0))
+            if (hoverTime >= 0.25f)
             {
                 Debug.Log("Wok Interact");
                 gameManager.CardInteract(gameManager.draggedCard, gameObject);

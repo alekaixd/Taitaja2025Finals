@@ -12,6 +12,7 @@ public class CardDrag : MonoBehaviour
     public Vector2 MousePosition;
     public GameManager gameManager;
     public MenuScript menuScript;
+    public MusicScript musicScript;
     public float PopupSpeed = 0.1f;
     public float PopupHeight = 50f; // Height to pop up when scaling
     public float scalespeed = 0.1f; // Speed of scaling
