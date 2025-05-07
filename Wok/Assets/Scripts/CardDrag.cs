@@ -134,8 +134,11 @@ public class CardDrag : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (gameManager.draggingCard && isHovered && gameManager.draggedCard != null && gameManager.draggedCard != gameObject)
+        {
+            StartCoroutine(DelayedCardInteract(1f)); // Add a delay of 0.5 seconds before interaction
+        }
 
-         // Use Input.mousePosition to get the correct screen-space mouse position
         RectTransform rectTransform = GetComponent<RectTransform>();
         
         if (rectTransform != null)
@@ -144,7 +147,6 @@ public class CardDrag : MonoBehaviour
             Rect rect = rectTransform.rect;
 
             bool isInside = rect.Contains(localMousePosition);
-            //Debug.Log("Mouse Position: " + MousePosition + " Local Mouse Position: " + localMousePosition + " Rect: " + rect + " Is Inside: " + isInside);
             if (isInside && !isHovered)
             {
                 OnMouseEnter();
@@ -171,6 +173,16 @@ public class CardDrag : MonoBehaviour
         else if (!isDragged)
         {
             ReturnToDefaultPosition();
+        }
+    }
+
+    IEnumerator DelayedCardInteract(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (gameManager.draggingCard && isHovered && gameManager.draggedCard != null)
+        {
+            Debug.Log("Card Interact after delay");
+            gameManager.CardInteract(gameManager.draggedCard, gameObject);
         }
     }
 

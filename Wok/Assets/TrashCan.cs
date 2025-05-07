@@ -14,7 +14,7 @@ public class TrashCan : MonoBehaviour
     public float scalespeed = 0.1f; // Speed of scaling
     public bool isDragged = false; // Flag to check if the card is being dragged
     public Vector3 scaleSize; // Size to scale to
-    public float HoverDelay = 0.1f; // Delay before the card pops up
+    public float HoverDelay = 1f; 
 
     void Start()
     {
@@ -66,7 +66,20 @@ public class TrashCan : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        if (isHovered && gameManager.draggingCard && gameManager.draggedCard != null)
+        {
+            HoverDelay -= Time.fixedDeltaTime;
+            if (HoverDelay <= 0)
+            {
+            Debug.Log("Trash Interact after delay");
+            gameManager.CardInteract(gameManager.draggedCard, gameObject);
+            HoverDelay = 1f; // Reset the delay
+            }
+        }
+        else
+        {
+            HoverDelay = 0.1f; // Reset the delay if not hovering or dragging
+        }
         MousePosition = Input.mousePosition; // Use Input.mousePosition to get the correct screen-space mouse position
         RectTransform rectTransform = GetComponent<RectTransform>();
         
