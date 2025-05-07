@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public List<SpecialCardObject> SpecialDeck = new();
     public GameObject hand;
     public GameObject specialHand;
+    public MusicScript musicScript;
     public OrderManager orderManager;
     public List<GameObject> handCards = new();
     public List<GameObject> specialHandCards = new();
@@ -238,6 +239,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Interractee.CompareTag("Pot"))
         {
+            musicScript.PlaySizzle();
             AddFlavours(interactingCard);
             orderManager.IncrementIngridients();
             draggedCard = null;
@@ -246,6 +248,7 @@ public class GameManager : MonoBehaviour
         }
         else if (Interractee.CompareTag("Card") && InteractorSpecial.CompareTag("S-Card"))
         {
+            musicScript.PlayCard1();
             Debug.Log("Card Interract");
             draggedCard = null;
             draggingCard = false;

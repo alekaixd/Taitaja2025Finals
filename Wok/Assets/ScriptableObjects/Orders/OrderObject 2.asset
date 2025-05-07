@@ -17,8 +17,8 @@ MonoBehaviour:
     please.."'
   orderRequirement:
   - flavor: 4
-    flavourValue: 9
+    flavourValue: 6
     isReversedRequirement: 0
   - flavor: 5
-    flavourValue: 6
+    flavourValue: 3
     isReversedRequirement: 1

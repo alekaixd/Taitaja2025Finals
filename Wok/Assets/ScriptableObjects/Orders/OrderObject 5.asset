@@ -16,5 +16,5 @@ MonoBehaviour:
   orderDescription: I'd like a wok stir-fry with a touch of sweetness from honey.
   orderRequirement:
   - flavor: 2
-    flavourValue: 6
+    flavourValue: 3
     isReversedRequirement: 0

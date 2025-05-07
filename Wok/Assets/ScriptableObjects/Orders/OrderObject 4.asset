@@ -16,5 +16,5 @@ MonoBehaviour:
   orderDescription: Give me a fiery wok dish, extra red chilies please.
   orderRequirement:
   - flavor: 1
-    flavourValue: 12
+    flavourValue: 9
     isReversedRequirement: 0

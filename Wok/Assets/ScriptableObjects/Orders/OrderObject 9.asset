@@ -16,5 +16,5 @@ MonoBehaviour:
   orderDescription: A deeply savoury wok dish please
   orderRequirement:
   - flavor: 4
-    flavourValue: 12
+    flavourValue: 9
     isReversedRequirement: 0

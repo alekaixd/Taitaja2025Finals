@@ -16,5 +16,5 @@ MonoBehaviour:
   orderDescription: '"I like it sour. Mmm~~~"'
   orderRequirement:
   - flavor: 3
-    flavourValue: 6
+    flavourValue: 3
     isReversedRequirement: 0

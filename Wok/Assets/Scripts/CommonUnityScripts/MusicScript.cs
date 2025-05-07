@@ -73,17 +73,17 @@ public class MusicScript : MonoBehaviour
     /// <summary>
     /// Plays the hitsound.
     /// </summary>
-    public void PlayHitsound()
+    public void PlaySizzle()
     {
         HissSounds.volume = MasterVolume / 100;
         HissSounds.Play();
     }
-    public void PlayTap()
+    public void PlayCard1()
     {
         ButtonTap.volume = MasterVolume / 100;
         ButtonTap.Play();
     }
-    public void PlayLift()
+    public void PlayCard2()
     {
         ButtonLift.volume = MasterVolume / 100;
         ButtonLift.Play();

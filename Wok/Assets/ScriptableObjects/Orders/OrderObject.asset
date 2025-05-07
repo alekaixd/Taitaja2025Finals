@@ -16,8 +16,8 @@ MonoBehaviour:
   orderDescription: '"i want it to be spicy but not too sweet"'
   orderRequirement:
   - flavor: 1
-    flavourValue: 9
+    flavourValue: 6
     isReversedRequirement: 0
   - flavor: 2
-    flavourValue: 6
+    flavourValue: 3
     isReversedRequirement: 1

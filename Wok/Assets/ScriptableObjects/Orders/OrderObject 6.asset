@@ -16,11 +16,11 @@ MonoBehaviour:
   orderDescription: Make it savoury and slightly sweet, but absolutely no sourness.
   orderRequirement:
   - flavor: 4
-    flavourValue: 6
+    flavourValue: 3
     isReversedRequirement: 0
   - flavor: 2
-    flavourValue: 3
+    flavourValue: 2
     isReversedRequirement: 0
   - flavor: 3
-    flavourValue: 3
+    flavourValue: 2
     isReversedRequirement: 1

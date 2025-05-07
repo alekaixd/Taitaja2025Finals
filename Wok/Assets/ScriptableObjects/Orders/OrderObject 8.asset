@@ -15,6 +15,6 @@ MonoBehaviour:
   orderName: Salty Only
   orderDescription: Just a simple, salty wok preparation, please.
   orderRequirement:
-  - flavor: 1
-    flavourValue: 12
+  - flavor: 5
+    flavourValue: 6
     isReversedRequirement: 0

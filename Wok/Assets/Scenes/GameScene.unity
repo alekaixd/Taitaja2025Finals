@@ -897,6 +897,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e5627aa2c4461094fae6466d0bcdd759, type: 2}
   hand: {fileID: 884547576}
   specialHand: {fileID: 195173612}
+  musicScript: {fileID: 0}
   orderManager: {fileID: 778337518}
   handCards: []
   specialHandCards: []
@@ -1630,6 +1631,8 @@ MonoBehaviour:
   ingredientsUsed: 0
   roundText: {fileID: 1458511036}
   ingredientsUsedText: {fileID: 724639622}
+  gameOverText: {fileID: 0}
+  gameOverScreen: {fileID: 0}
 --- !u!1 &781769026
 GameObject:
   m_ObjectHideFlags: 0
@@ -5458,7 +5461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2052930687
 RectTransform:
   m_ObjectHideFlags: 0

@@ -101,6 +101,7 @@ public class CardDrag : MonoBehaviour
             gameManager.draggedCard = gameObject;
             isDragged = true;
             gameManager.draggingCard = true;
+            musicScript.PlayCard1();
         }
     }
 
@@ -110,6 +111,7 @@ public class CardDrag : MonoBehaviour
         if (isHovered && gameManager.draggingCard && gameManager.draggedCard != null)
         {
             Debug.Log("Card Interract");
+            
             gameManager.CardInteract(gameManager.draggedCard, gameObject);
         }
         isDragged = false;
