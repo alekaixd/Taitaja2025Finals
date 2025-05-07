@@ -8,8 +8,11 @@ public class InteractableCardClass : MonoBehaviour
     public GameObject flavourTextParent;
     public FlavourClass flavour;
 
+    string foodname;
+
     public void SetFoodName(string name)
     {
+        foodname = name;
         titleText.text = name;
     }
 

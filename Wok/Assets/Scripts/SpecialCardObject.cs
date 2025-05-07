@@ -7,5 +7,5 @@ using UnityEngine;
 public class SpecialCardObject : ScriptableObject
 {
     public string foodName;
-    public List<FlavourClass> flavourClass = new();
+    public FlavourClass flavourClass;
 }
