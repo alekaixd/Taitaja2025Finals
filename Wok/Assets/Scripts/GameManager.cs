@@ -96,6 +96,10 @@ public class GameManager : MonoBehaviour
             draggedCard = null;
             draggingCard = false;
         }
+        if (Interractee.CompareTag("Pot"))
+        {
+            RemoveCardFromHand(Interactor.GetComponent<CardClass>());
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
