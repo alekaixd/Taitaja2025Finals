@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public List<CardObject> Deck = new();
     public GameObject hand;
     public List<GameObject> handCards = new();
-
+    public Slider SpiceSlider, SourSlider, SweetSlider, SavourySlider, SaltySlider;
     public int maxHandSize = 5;
     public int handSize = 0;
     public bool draggingCard;
@@ -81,6 +81,36 @@ public class GameManager : MonoBehaviour
             currentCard += 1;
         }
     }
+    void AddFlavours(CardClass card)
+    {
+
+        foreach (FlavourClass flavourClass in card.flavourClass)
+        {
+            switch (flavourClass.Flavor)
+            {
+                case CardFlavor.Spicy:
+                    spicy = Mathf.Min(spicy + flavourClass.FlavourValue, 15);
+                    SpiceSlider.value = spicy;
+                    break;
+                case CardFlavor.Sweet:
+                    sweet += flavourClass.FlavourValue;
+                    SweetSlider.value = sweet;
+                    break;
+                case CardFlavor.Sour:
+                    sour += flavourClass.FlavourValue;
+                    break;
+                case CardFlavor.Savoury:
+                    savoury += flavourClass.FlavourValue;
+                    break;
+                case CardFlavor.Salty:
+                    salty += flavourClass.FlavourValue;
+                    break;
+                default:
+                    Debug.LogWarning("Unknown flavor encountered: " + flavourClass.Flavor);
+                    break;
+            }
+        }
+    }
     public void CardInteract(GameObject Interactor, GameObject Interractee)
     {
         if (Interactor == null || Interractee == null )
@@ -88,17 +118,26 @@ public class GameManager : MonoBehaviour
             Debug.Log("Could not interract as one party is null");
             return;
         }
+        CardClass interactingCard = Interactor.GetComponent<CardClass>();
         //Debug.Log("Card " + Interactor.GetComponent<CardClass>().foodName + " Interacted with " + Interractee.GetComponent<CardClass>().foodName);
         if (Interractee.CompareTag("Trash"))
         {
             Debug.Log("Trashing card...");
-            RemoveCardFromHand(Interactor.GetComponent<CardClass>());
+            RemoveCardFromHand(interactingCard);
             draggedCard = null;
             draggingCard = false;
         }
-        if (Interractee.CompareTag("Pot"))
+        else if (Interractee.CompareTag("Pot"))
         {
-            RemoveCardFromHand(Interactor.GetComponent<CardClass>());
+            AddFlavours(interactingCard);
+            draggedCard = null;
+            draggingCard = false;
+            RemoveCardFromHand(interactingCard);
+        }
+        else if (Interractee.CompareTag("Card"))
+        {
+            draggedCard = null;
+            draggingCard = false;
         }
     }
     // Update is called once per frame
