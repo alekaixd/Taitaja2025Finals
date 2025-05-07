@@ -67,7 +67,12 @@ public class GameManager : MonoBehaviour
             drag.MouseState = mouse1;
             drag.MousePosition = MousePosition;
         }
-
+        foreach (GameObject specialCard in specialHandCards)
+        {
+            CardDrag drag = specialCard.GetComponent<CardDrag>();
+            drag.MouseState = mouse1;
+            drag.MousePosition = MousePosition;
+        }
 
         if (handSize < maxHandSize && Decksize > 0)
         {
@@ -215,14 +220,14 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-    public void CardInteract(GameObject Interactor, GameObject Interractee)
+    public void CardInteract(GameObject InteractorSpecial, GameObject Interractee)
     {
-        if (Interactor == null || Interractee == null)
+        if (InteractorSpecial == null || Interractee == null)
         {
             Debug.Log("Could not interract as one party is null");
             return;
         }
-        CardClass interactingCard = Interactor.GetComponent<CardClass>();
+        CardClass interactingCard = InteractorSpecial.GetComponent<CardClass>();
         //Debug.Log("Card " + Interactor.GetComponent<CardClass>().foodName + " Interacted with " + Interractee.GetComponent<CardClass>().foodName);
         if (Interractee.CompareTag("Trash"))
         {
@@ -239,13 +244,9 @@ public class GameManager : MonoBehaviour
             draggingCard = false;
             RemoveCardFromHand(interactingCard);
         }
-        else if (Interractee.CompareTag("Card") || Interractee.CompareTag("S-Card"))
+        else if (Interractee.CompareTag("Card") && InteractorSpecial.CompareTag("S-Card"))
         {
             Debug.Log("Card Interract");
-            if (Interactor.CompareTag("S-Card"))
-            {
-
-            }
             draggedCard = null;
             draggingCard = false;
         }

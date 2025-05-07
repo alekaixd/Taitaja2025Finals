@@ -58,7 +58,7 @@ public class PotScript : MonoBehaviour
             }
         }
 
-        if (isHovered && gameManager.draggingCard)
+        if (isHovered && gameManager.draggingCard && !gameManager.draggedCard.CompareTag("S-Card"))
         {
             hoverTime += Time.fixedDeltaTime; // Increment hover time while hovering
             if (hoverTime >= 0.25f)
