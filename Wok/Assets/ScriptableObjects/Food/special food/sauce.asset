@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9c358ccf444d834eb4f044203ed0814, type: 3}
   m_Name: sauce
   m_EditorClassIdentifier: 
-  foodName: 
-  flavourClass: []
+  foodName: special sause
+  flavourClass:
+  - Flavor: 2
+    FlavourValue: 3
