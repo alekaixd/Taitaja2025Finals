@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa76cc74198daa34ca7b90aeda8e6ec1, type: 3}
-  m_Name: OrderObject
+  m_Name: OrderObject 3
   m_EditorClassIdentifier: 
-  orderName: spicy wok
-  orderDescription: '"i want it to be spicy but not too sweet"'
+  orderName: Sour wok
+  orderDescription: '"I like it sour. Mmm~~~"'
   orderRequirement:
-  - flavor: 1
-    flavourValue: 4
-    isReversedRequirement: 0
-  - flavor: 2
+  - flavor: 3
     flavourValue: 5
-    isReversedRequirement: 1
+    isReversedRequirement: 0

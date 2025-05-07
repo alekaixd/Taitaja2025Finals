@@ -1,18 +1,18 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "OrderObject", menuName = "OrderObjects/Order", order = 1)]
 public class OrderObject : ScriptableObject
 {
+    public string orderName;
     public string orderDescription;
-    public OrderRequirement orderRequirement = new();
+    public List<OrderRequirement> orderRequirement = new();
 }
 
 [System.Serializable]
 public class OrderRequirement
 {
-    public int spiceRequired;
-    public int sweetnessRequired;
-    public int sournessRequired;
-    public int bitternessRequired;
-    public int saltynessRequired;
+    public CardFlavor flavor;
+    public int flavourValue;
+    public bool isReversedRequirement; // If true, the requirement is reversed, meaning the player must not have this flavour in their order
 }
