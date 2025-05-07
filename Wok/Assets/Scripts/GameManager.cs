@@ -24,11 +24,37 @@ public class GameManager : MonoBehaviour
     public int sour;
     public int savoury;
     public int salty;
+    public bool mouse1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
+    }
+    void FixedUpdate()
+    {
+        MousePosition = Mouse.current.position.ReadValue();
+        mouse1 = Input.GetMouseButton(0);
+        foreach (GameObject card in handCards)
+        {
+            CardDrag drag = card.GetComponent<CardDrag>();
+            drag.MouseState = mouse1;
+            drag.MousePosition = MousePosition;
+        }
+        
+
+        if (handSize < maxHandSize && Deck.Count > 0)
+        {
+            AddCardToHand(Deck[Random.Range(0, Deck.Count)]);
+        }
+        if(draggingCard)
+        {
+            pot.color = new Color (255,255,255,0.1f);
+        }
+        else
+        {
+            pot.color = Color.clear;
+        }
     }
 
 
@@ -88,26 +114,29 @@ public class GameManager : MonoBehaviour
         {
             switch (flavourClass.Flavor)
             {
-                case CardFlavor.Spicy:
-                    spicy = Mathf.Min(spicy + flavourClass.FlavourValue, 15);
-                    SpiceSlider.value = spicy;
-                    break;
-                case CardFlavor.Sweet:
-                    sweet += flavourClass.FlavourValue;
-                    SweetSlider.value = sweet;
-                    break;
-                case CardFlavor.Sour:
-                    sour += flavourClass.FlavourValue;
-                    break;
-                case CardFlavor.Savoury:
-                    savoury += flavourClass.FlavourValue;
-                    break;
-                case CardFlavor.Salty:
-                    salty += flavourClass.FlavourValue;
-                    break;
-                default:
-                    Debug.LogWarning("Unknown flavor encountered: " + flavourClass.Flavor);
-                    break;
+            case CardFlavor.Spicy:
+                spicy = Mathf.Min(spicy + flavourClass.FlavourValue, 15);
+                SpiceSlider.value = spicy;
+                break;
+            case CardFlavor.Sweet:
+                sweet = Mathf.Min(sweet + flavourClass.FlavourValue, 15);
+                SweetSlider.value = sweet;
+                break;
+            case CardFlavor.Sour:
+                sour = Mathf.Min(sour + flavourClass.FlavourValue, 15);
+                SourSlider.value = sour;
+                break;
+            case CardFlavor.Savoury:
+                savoury = Mathf.Min(savoury + flavourClass.FlavourValue, 15);
+                SavourySlider.value = savoury;
+                break;
+            case CardFlavor.Salty:
+                salty = Mathf.Min(salty + flavourClass.FlavourValue, 15);
+                SaltySlider.value = salty;
+                break;
+            default:
+                Debug.LogWarning("Unknown flavor encountered: " + flavourClass.Flavor);
+                break;
             }
         }
     }
@@ -138,24 +167,6 @@ public class GameManager : MonoBehaviour
         {
             draggedCard = null;
             draggingCard = false;
-        }
-    }
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        MousePosition = Mouse.current.position.ReadValue();
-
-        if (handSize < maxHandSize && Deck.Count > 0)
-        {
-            AddCardToHand(Deck[Random.Range(0, Deck.Count)]);
-        }
-        if(draggingCard)
-        {
-            pot.color = new Color (255,255,255,0.1f);
-        }
-        else
-        {
-            pot.color = Color.clear;
         }
     }
     public Image pot;

@@ -587,6 +587,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a045c68d277f2c847989050278d92d3d, type: 2}
   hand: {fileID: 884547576}
   handCards: []
+  SpiceSlider: {fileID: 0}
+  SourSlider: {fileID: 0}
+  SweetSlider: {fileID: 0}
+  SavourySlider: {fileID: 0}
+  SaltySlider: {fileID: 0}
   maxHandSize: 5
   handSize: 0
   draggingCard: 0
@@ -1766,7 +1771,7 @@ MonoBehaviour:
   HissSounds: {fileID: 0}
   ButtonTap: {fileID: 0}
   ButtonLift: {fileID: 0}
-  MasterVolume: 0
+  MasterVolume: 50
   songPosition: 0
 --- !u!4 &1472848251
 Transform:

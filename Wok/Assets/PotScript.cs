@@ -3,17 +3,9 @@ using UnityEngine;
 public class PotScript : MonoBehaviour
 {
     public bool isHovered;
-    public Vector2 defaultPosition;
-    public Vector3 DefaultScale;
     public Vector2 MousePosition;
     public GameManager gameManager;
     public MenuScript menuScript;
-    public float PopupSpeed = 0.1f;
-    public float PopupHeight = 50f; // Height to pop up when scaling
-    public float scalespeed = 0.1f; // Speed of scaling
-    public bool isDragged = false; // Flag to check if the card is being dragged
-    public Vector3 scaleSize; // Size to scale to
-    public float HoverDelay = 0.1f; // Delay before the card pops up
 
     void Start()
     {
@@ -40,41 +32,21 @@ public class PotScript : MonoBehaviour
         }
     }
 
-    void OnMouseDown()
-    {
-        if (isHovered && gameManager.draggingCard == false) // Only allow dragging if hovered
-        {
-            gameManager.draggedCard = gameObject;
-            isDragged = true;
-            gameManager.draggingCard = true;
-        }
-    }
-
-    void OnMouseUp()
-    {
-        if (isHovered && gameManager.draggingCard && gameManager.draggedCard != null)
-        {
-            Debug.Log("Wok Interract");
-            gameManager.CardInteract(gameManager.draggedCard, gameObject);
-        }
-        isDragged = false;
-        gameManager.draggingCard = false;
-    }
-
     // Update is called once per frame
+    public  float hoverTime = 0f; // Tracks how long the mouse has been hovering
+
     void FixedUpdate()
     {
-
         MousePosition = Input.mousePosition; // Use Input.mousePosition to get the correct screen-space mouse position
         RectTransform rectTransform = GetComponent<RectTransform>();
-        
+
         if (rectTransform != null)
         {
             Vector2 localMousePosition = rectTransform.InverseTransformPoint(Camera.main.ScreenToWorldPoint(MousePosition));
             Rect rect = rectTransform.rect;
 
             bool isInside = rect.Contains(localMousePosition);
-            //Debug.Log("Mouse Position: " + MousePosition + " Local Mouse Position: " + localMousePosition + " Rect: " + rect + " Is Inside: " + isInside);
+
             if (isInside && !isHovered)
             {
                 OnMouseEnter();
@@ -82,15 +54,23 @@ public class PotScript : MonoBehaviour
             else if (!isInside && isHovered)
             {
                 OnMouseExit();
+                hoverTime = 0f; // Reset hover time when exiting
             }
         }
-        if (Input.GetMouseButton(0))
+
+        if (isHovered && gameManager.draggingCard)
         {
-            OnMouseDown();
+            hoverTime += Time.fixedDeltaTime; // Increment hover time while hovering
+            if (hoverTime >= 0.5f && !Input.GetMouseButton(0))
+            {
+                Debug.Log("Wok Interact");
+                gameManager.CardInteract(gameManager.draggedCard, gameObject);
+                hoverTime = 0f; // Reset hover time after interaction
+            }
         }
-        else if (!Input.GetMouseButton(0))
+        else
         {
-            OnMouseUp();
+            hoverTime = 0f; // Reset hover time if not hovering or not dragging
         }
     }
 

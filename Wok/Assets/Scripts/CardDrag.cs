@@ -7,6 +7,7 @@ public class CardDrag : MonoBehaviour
     // Remember to use the new Input System for mouse input
     public bool isHovered;
     public Vector2 defaultPosition;
+    public bool MouseState;
     public Vector3 DefaultScale;
     public Vector2 MousePosition;
     public GameManager gameManager;
@@ -133,7 +134,7 @@ public class CardDrag : MonoBehaviour
     void FixedUpdate()
     {
 
-        MousePosition = Input.mousePosition; // Use Input.mousePosition to get the correct screen-space mouse position
+         // Use Input.mousePosition to get the correct screen-space mouse position
         RectTransform rectTransform = GetComponent<RectTransform>();
         
         if (rectTransform != null)
