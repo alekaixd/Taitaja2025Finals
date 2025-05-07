@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa76cc74198daa34ca7b90aeda8e6ec1, type: 3}
-  m_Name: OrderObject
+  m_Name: OrderObject 6
   m_EditorClassIdentifier: 
-  orderName: spicy wok
-  orderDescription: '"i want it to be spicy but not too sweet"'
+  orderName: No Sour
+  orderDescription: Make it savoury and slightly sweet, but absolutely no sourness.
   orderRequirement:
-  - flavor: 1
-    flavourValue: 9
+  - flavor: 4
+    flavourValue: 6
     isReversedRequirement: 0
   - flavor: 2
-    flavourValue: 6
+    flavourValue: 3
+    isReversedRequirement: 0
+  - flavor: 3
+    flavourValue: 0
     isReversedRequirement: 1

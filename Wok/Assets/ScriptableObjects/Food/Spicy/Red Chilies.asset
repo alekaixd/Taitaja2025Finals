@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30eccf2eb5441fc4283ea5de1ed3fac2, type: 3}
-  m_Name: Habanero Chili
+  m_Name: Red Chilies
   m_EditorClassIdentifier: 
-  foodName: Habanero
+  foodName: Red Chili
   flavourClass:
   - Flavor: 1
-    FlavourValue: 10
+    FlavourValue: 3

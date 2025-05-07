@@ -15,8 +15,7 @@ public class MusicScript : MonoBehaviour
     }
     void Start()
     {
-        MasterVolume = infoContainer.MasterVolume / 100f;
-        CurrentSong.volume = MasterVolume/ 100f;
+        MasterVolume = infoContainer.MasterVolume;
         //HitSounds.volume = HitsoundVolume / 100 * (MasterVolume / 100);
         UpdateVolume();
     }
@@ -123,7 +122,7 @@ public class MusicScript : MonoBehaviour
     /// </summary>
     public void UpdateVolume()
     {
-        CurrentSong.volume = MasterVolume/100;
+        CurrentSong.volume = MasterVolume;
         if (SceneManager.GetActiveScene().name != "MainMenu")
         {
             HissSounds.volume = MasterVolume*sfxValue;

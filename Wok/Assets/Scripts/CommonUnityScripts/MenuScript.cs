@@ -22,9 +22,9 @@ public class MenuScript : MonoBehaviour
     {
         if (SceneManager.GetSceneByBuildIndex(0) == SceneManager.GetActiveScene())
         {
-            musicScript.MasterVolume = slider.value;
+            musicScript.MasterVolume = slider.value/100;
             musicScript.UpdateVolume();
-            infoContainer.MasterVolume = slider.value;
+            infoContainer.MasterVolume = slider.value/100;
             audioText.text = slider.value.ToString();
         }
         
