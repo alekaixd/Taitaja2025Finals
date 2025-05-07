@@ -1,10 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
-using NUnit.Framework;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class CardDrag : MonoBehaviour
 {
@@ -20,7 +15,7 @@ public class CardDrag : MonoBehaviour
     public float PopupHeight = 50f; // Height to pop up when scaling
     public float scalespeed = 0.1f; // Speed of scaling
     public bool isDragged = false; // Flag to check if the card is being dragged
-    public Vector3 scaleSize = new (); // Size to scale to
+    public Vector3 scaleSize; // Size to scale to
     public float HoverDelay = 0.1f; // Delay before the card pops up
 
     void Start()
@@ -62,7 +57,7 @@ public class CardDrag : MonoBehaviour
     public IEnumerator ScaleTo(Vector3 targetScale, float expandspeed, float PopupSpeed, bool moveUp)
     {
         Vector3 initialScale = transform.localScale;
-        Vector3 initialPosition = transform.position;
+        Vector3 initialPosition = transform.localPosition;
         Vector3 targetPosition = moveUp ? new Vector3(initialPosition.x, defaultPosition.y + PopupHeight, initialPosition.z) : new Vector3(initialPosition.x, defaultPosition.y, initialPosition.z);
         if (returningToDefaultPos)
         {
@@ -93,7 +88,7 @@ public class CardDrag : MonoBehaviour
         transform.localScale = targetScale;
         if (moveUp || (!moveUp && isHovered == false)) // Finalize position only if unhovering
         {
-            transform.position = targetPosition;
+            transform.localPosition = targetPosition;
         }
     }
 
@@ -101,6 +96,7 @@ public class CardDrag : MonoBehaviour
     {
         if (isHovered && gameManager.draggingCard == false) // Only allow dragging if hovered
         {
+            gameManager.draggedCard = gameObject;
             isDragged = true;
             gameManager.draggingCard = true;
         }
@@ -108,14 +104,20 @@ public class CardDrag : MonoBehaviour
 
     void OnMouseUp()
     {
+        if (gameManager.draggedCard != gameObject && isHovered && gameManager.draggingCard)
+        {
+            gameManager.CardInteract(gameManager.draggedCard, gameObject);
+            gameManager.draggedCard = null;
+        }
         isDragged = false;
         gameManager.draggingCard = false;
+        gameManager.draggedCard = null;
     }
     bool returningToDefaultPos;
 
     void ReturnToDefaultPosition()
     {
-        if (Mathf.Approximately(transform.position.x, defaultPosition.x))
+        if (Mathf.Approximately(transform.localPosition.x, defaultPosition.x))
         {
             // Is at default pos
             returningToDefaultPos = false;
@@ -123,7 +125,7 @@ public class CardDrag : MonoBehaviour
         else
         {
             returningToDefaultPos = true;
-            transform.position = Vector3.Lerp(transform.position, defaultPosition, 1f);
+            transform.localPosition = Vector3.Lerp(transform.localPosition, defaultPosition, 1f);
         }
     }
 

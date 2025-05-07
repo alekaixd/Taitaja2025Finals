@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: -4822420266803132097}
   m_Layer: 5
   m_Name: card
-  m_TagString: Untagged
+  m_TagString: Card
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -397,7 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isHovered: 0
   defaultPosition: {x: 0, y: 0}
-  DefaultScale: {x: 0, y: 0}
+  DefaultScale: {x: 0, y: 0, z: 0}
   MousePosition: {x: 0, y: 0}
   gameManager: {fileID: 0}
   menuScript: {fileID: 0}
@@ -406,3 +406,4 @@ MonoBehaviour:
   scalespeed: 0.1
   isDragged: 0
   scaleSize: {x: 1.1, y: 1.1, z: 1.1}
+  HoverDelay: 0.1

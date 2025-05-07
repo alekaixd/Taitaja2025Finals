@@ -2,6 +2,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     public int maxHandSize = 5;
     public int handSize = 0;
     public bool draggingCard;
+    public GameObject draggedCard;
     public float cardGap;
 
     public int spicy;
@@ -33,11 +35,13 @@ public class GameManager : MonoBehaviour
     public void RemoveCardFromHand(CardClass card)
     {
         // Removes a card from the hand (unfinished)
+        handCards.Remove(card.gameObject);
         Destroy(card.gameObject);
         handSize--;
+        Debug.Log("Removed a card from hand");
     }
 
-    public void addCardToHand(CardObject card)
+    public void AddCardToHand(CardObject card)
     {
         // Adds a card to the hand
         GameObject cardObject = Instantiate(CardPrefab, hand.transform);
@@ -45,7 +49,7 @@ public class GameManager : MonoBehaviour
         cardDrag.gameManager = this;
         cardDrag.menuScript = GameObject.Find("MenuManager").GetComponent<MenuScript>();
         handCards.Add(cardObject);
-        OrganiseHand();
+        
         cardDrag.defaultPosition = cardObject.transform.position;
         CardClass cardClass = cardObject.GetComponent<CardClass>();
         cardClass.SetFoodName(card.foodName);
@@ -54,24 +58,43 @@ public class GameManager : MonoBehaviour
             cardClass.flavourClass.Add(flavour);
         }
         cardClass.InitializeCard();
+        OrganiseHand();
         handSize++;
+        
     }
     void OrganiseHand()
     {
         int currentCard = 1;
         foreach (GameObject card in handCards)
         {
-            card.transform.localPosition = new Vector3 (currentCard switch 
+            Vector3 newpos = new Vector3(currentCard switch 
             {
-                1 => -cardGap*2,
+                1 => -cardGap * 2,
                 2 => -cardGap,
                 3 => 0f,
                 4 => cardGap,
-                5 => cardGap*2,
+                5 => cardGap * 2,
                 _ => 0f
-                
-            },0 );
+            }, 0f, 0f);
+            card.transform.localPosition = newpos;
+            card.GetComponent<CardDrag>().defaultPosition = newpos;
             currentCard += 1;
+        }
+    }
+    public void CardInteract(GameObject Interactor, GameObject Interractee)
+    {
+        if (Interactor == null || Interractee == null )
+        {
+            Debug.Log("Could not interract as one party is null");
+            return;
+        }
+        //Debug.Log("Card " + Interactor.GetComponent<CardClass>().foodName + " Interacted with " + Interractee.GetComponent<CardClass>().foodName);
+        if (Interractee.CompareTag("Trash"))
+        {
+            Debug.Log("Trashing card...");
+            RemoveCardFromHand(Interactor.GetComponent<CardClass>());
+            draggedCard = null;
+            draggingCard = false;
         }
     }
     // Update is called once per frame
@@ -79,12 +102,20 @@ public class GameManager : MonoBehaviour
     {
         MousePosition = Mouse.current.position.ReadValue();
 
-        if (handSize < maxHandSize)
+        if (handSize < maxHandSize && Deck.Count > 0)
         {
-            addCardToHand(Deck[Random.Range(0, Deck.Count)]);
+            AddCardToHand(Deck[Random.Range(0, Deck.Count)]);
+        }
+        if(draggingCard)
+        {
+            pot.color = new Color (255,255,255,0.1f);
+        }
+        else
+        {
+            pot.color = Color.clear;
         }
     }
-
+    public Image pot;
 
 }
     public enum CardFlavor
