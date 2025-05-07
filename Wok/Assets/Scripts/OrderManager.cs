@@ -27,6 +27,9 @@ public class OrderManager : MonoBehaviour
     public TextMeshProUGUI roundText;
     public TextMeshProUGUI ingredientsUsedText;
 
+    public TextMeshProUGUI gameOverText;
+    public GameObject gameOverScreen;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -153,9 +156,9 @@ public class OrderManager : MonoBehaviour
     public void GameOver(string gameoverMessage)
     {
         Debug.Log("Game Over: " + gameoverMessage);
-        // Game over logic
-        // Show game over screen
-        // Reset game state
+
+        gameOverScreen.SetActive(true);
+        gameOverText.text = gameoverMessage;    
     }
 
     public void NextRound()

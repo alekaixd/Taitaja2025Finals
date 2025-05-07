@@ -56,12 +56,12 @@ public class MenuScript : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ResetGameplay()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public bool mousePressed;
     public bool startedMousePress;
