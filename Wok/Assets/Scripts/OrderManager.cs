@@ -145,6 +145,7 @@ public class OrderManager : MonoBehaviour
         Debug.Log("Order completed successfully!"); // Log success message
         // if all requirements are met, complete the order
         Destroy(currentOrderObject);
+        gameManager.ResetFlavours();
         CreateOrder(orderList[Random.Range(0, orderList.Count)]);
         NextRound();
     }
@@ -166,6 +167,6 @@ public class OrderManager : MonoBehaviour
     public void IncrementIngridients()
     {
         ingredientsUsed++;
-        ingredientsUsedText.text = "Ingredients used: " + ingredientsUsed;
+        ingredientsUsedText.text = "Cards Played: " + ingredientsUsed;
     }
 }

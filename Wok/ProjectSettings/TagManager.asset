@@ -7,6 +7,7 @@ TagManager:
   - Trash
   - Card
   - Pot
+  - S-Card
   layers:
   - Default
   - TransparentFX

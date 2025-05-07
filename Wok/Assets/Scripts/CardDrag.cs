@@ -111,7 +111,6 @@ public class CardDrag : MonoBehaviour
         {
             Debug.Log("Card Interract");
             gameManager.CardInteract(gameManager.draggedCard, gameObject);
-            gameManager.draggedCard = null;
         }
         isDragged = false;
         gameManager.draggingCard = false;

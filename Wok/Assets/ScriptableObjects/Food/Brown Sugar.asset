@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Brown Sugar
   m_EditorClassIdentifier: 
   foodName: Brown Sugar
-  flavourClass: []
+  flavourClass:
+  - Flavor: 2
+    FlavourValue: 3

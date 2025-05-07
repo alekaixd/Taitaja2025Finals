@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,8 +10,9 @@ public class GameManager : MonoBehaviour
 {
     public Vector2 MousePosition;
     public GameObject CardPrefab;
-    public List<CardObject> Deck = new();
+    public List<CardObject> GameDeck = new();
     public GameObject hand;
+    public OrderManager orderManager;
     public List<GameObject> handCards = new();
     public Slider SpiceSlider, SourSlider, SweetSlider, SavourySlider, SaltySlider;
     public int maxHandSize = 5;
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
     public bool draggingCard;
     public GameObject draggedCard;
     public float cardGap;
+    public TMP_Text Decknumber;
+    public int Decksize = 15;
 
     public int spicy;
     public int sweet;
@@ -27,9 +31,26 @@ public class GameManager : MonoBehaviour
     public bool mouse1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         
+    }
+    public void ResetFlavours()
+    {
+        spicy = 0;
+        sweet = 0;
+        sour = 0;
+        savoury = 0;
+        salty = 0;
+
+        SpiceSlider.value = spicy;
+        SweetSlider.value = sweet;
+        SourSlider.value = sour;
+        SavourySlider.value = savoury;
+        SaltySlider.value = salty;
+
+        Decksize = 15;
+        Debug.Log("All flavours have been reset to 0.");
     }
     void FixedUpdate()
     {
@@ -43,9 +64,9 @@ public class GameManager : MonoBehaviour
         }
         
 
-        if (handSize < maxHandSize && Deck.Count > 0)
+        if (handSize < maxHandSize && Decksize > 0)
         {
-            AddCardToHand(Deck[Random.Range(0, Deck.Count)]);
+            AddCardToHand(GameDeck[Random.Range(0, GameDeck.Count)]);
         }
         if(draggingCard)
         {
@@ -62,13 +83,24 @@ public class GameManager : MonoBehaviour
     {
         // Removes a card from the hand (unfinished)
         handCards.Remove(card.gameObject);
+        if (Decksize>0)
+        {
+            Decksize--;
+        }
+        
         Destroy(card.gameObject);
         handSize--;
+        if (handSize == 0)
+        {
+            orderManager.GameOver("Ran out of Cards");
+        }
+        Decknumber.text = Decksize.ToString();
         Debug.Log("Removed a card from hand");
     }
 
     public void AddCardToHand(CardObject card)
     {
+        Decknumber.text = Decksize.ToString();
         // Adds a card to the hand
         GameObject cardObject = Instantiate(CardPrefab, hand.transform);
         CardDrag cardDrag = cardObject.GetComponent<CardDrag>();
@@ -159,11 +191,12 @@ public class GameManager : MonoBehaviour
         else if (Interractee.CompareTag("Pot"))
         {
             AddFlavours(interactingCard);
+            orderManager.IncrementIngridients();
             draggedCard = null;
             draggingCard = false;
             RemoveCardFromHand(interactingCard);
         }
-        else if (Interractee.CompareTag("Card"))
+        else if (Interractee.CompareTag("Card") || Interractee.CompareTag("S-Card"))
         {
             Debug.Log("Card Interract");
             if (Interactor.CompareTag("S-Card"))
