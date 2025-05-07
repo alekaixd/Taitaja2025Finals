@@ -20,9 +20,21 @@ public class CardClass : MonoBehaviour
         foodNameText.text = name;
     }
 
-    public void AddFlavour(FlavourClass flavour)
+    public void AddNewFlavour(FlavourClass flavour)
     {
         flavourClass.Add(flavour);
+    }
+
+    public void AddExistingFlavour(FlavourClass flavourToAdd)
+    {
+        foreach(FlavourClass flavour in flavourClass)
+        {
+            if (flavour.Flavor == flavourToAdd.Flavor)
+            {
+                flavour.FlavourValue += flavourToAdd.FlavourValue;
+                return;
+            }
+        }
     }
 
     public void InitializeCard()
