@@ -6,29 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class MusicScript : MonoBehaviour
 {
-    public AudioSource CurrentSong, HitSounds, MissSound, ButtonTap, ButtonLift;
-    public float MasterVolume, MusicVolume, HitsoundVolume, songPosition;
+    public AudioSource CurrentSong, HissSounds, ButtonTap, ButtonLift;
+    public float MasterVolume, songPosition;
     private InfoContainer infoContainer;
-    void FixedUpdate()
+    void Awake()
     {
-        if (CurrentSong.isPlaying)
-        {
-            songPosition = CurrentSong.time;
-        }
+        infoContainer = FindFirstObjectByType<InfoContainer>();
     }
     void Start()
     {
-        
-        
-        if (SceneManager.GetActiveScene().buildIndex == 0) // Get setting manager if in main menu
-        {
-
-        }
-        else if (SceneManager.GetActiveScene().buildIndex == 1)// Else find EditorManager
-        {
-
-        }
-        CurrentSong.volume = MusicVolume / 100 * (MasterVolume / 100);
+        MasterVolume = infoContainer.MasterVolume;
+        CurrentSong.volume = infoContainer.MasterVolume;
         //HitSounds.volume = HitsoundVolume / 100 * (MasterVolume / 100);
         UpdateVolume();
     }
@@ -49,7 +37,7 @@ public class MusicScript : MonoBehaviour
     /// <param name="pitch">The pitch to play the music at.</param>
     public void PlayMusic(float pitch = 1.0f)
     {
-        CurrentSong.volume = MusicVolume / 100 * (MasterVolume / 100);
+        CurrentSong.volume =MasterVolume / 100;
         CurrentSong.pitch = pitch;
         CurrentSong.Play();
         CurrentSong.loop = false;
@@ -61,7 +49,7 @@ public class MusicScript : MonoBehaviour
     /// <param name="previewPoint">The point to start the preview from.</param>
     public void PlayMusicPreview(float previewPoint)
     {
-        CurrentSong.volume = MusicVolume / 100 * (MasterVolume / 100);
+        CurrentSong.volume =MasterVolume / 100;
         CurrentSong.Play();
         CurrentSong.time = previewPoint;
         CurrentSong.loop = true;
@@ -88,17 +76,8 @@ public class MusicScript : MonoBehaviour
     /// </summary>
     public void PlayHitsound()
     {
-        HitSounds.volume = MasterVolume / 100;
-        HitSounds.Play();
-    }
-
-    /// <summary>
-    /// Plays the miss sound.
-    /// </summary>
-    public void PlayMissSound()
-    {
-        MissSound.volume = MasterVolume / 100;
-        MissSound.Play();
+        HissSounds.volume = MasterVolume / 100;
+        HissSounds.Play();
     }
     public void PlayTap()
     {
@@ -144,6 +123,6 @@ public class MusicScript : MonoBehaviour
     /// </summary>
     public void UpdateVolume()
     {
-        CurrentSong.volume = MusicVolume / 100 * (MasterVolume / 100);
+        CurrentSong.volume = MasterVolume;
     }
 }

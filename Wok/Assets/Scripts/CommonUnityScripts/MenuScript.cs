@@ -1,20 +1,33 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using UnityEngine.AI;
+
 
 public class MenuScript : MonoBehaviour
 {
+    public Slider slider;
     public MusicScript musicScript;
-    void Start()
+    public InfoContainer infoContainer;
+    public TMP_Text audioText;
+    void Awake()
     {
+        infoContainer = FindFirstObjectByType<InfoContainer>();
     }
     void Update()
     {
 
+    }
+    public void UpdateVolume()
+    {
+        if (SceneManager.GetSceneByBuildIndex(0) == SceneManager.GetActiveScene())
+        {
+            musicScript.MasterVolume = slider.value;
+            musicScript.UpdateVolume();
+            infoContainer.MasterVolume = slider.value;
+            audioText.text = slider.value.ToString();
+        }
+        
     }
     public void QuitToDesktop()
     {
