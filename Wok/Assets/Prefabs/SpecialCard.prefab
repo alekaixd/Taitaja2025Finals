@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 4179963631931269904}
-  flavourTextPrefab: {fileID: 2770105618843521485, guid: eaff93236153b2e48b383f3ff899feb5, type: 3}
+  flavourTextPrefab: {fileID: 2770105618843521485, guid: a15548d819a58f74386d05dadf6566ae, type: 3}
   flavourTextParent: {fileID: 879983938332951446}
   flavour:
     Flavor: 0
@@ -260,7 +260,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

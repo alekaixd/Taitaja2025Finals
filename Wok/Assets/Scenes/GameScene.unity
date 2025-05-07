@@ -321,6 +321,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_ActionId: dad70c86-b58c-4b17-88ad-f5e53adf419e
+--- !u!1 &195173612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195173613}
+  m_Layer: 5
+  m_Name: specialHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &195173613
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195173612}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1645360839}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -738.29, y: -389}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &230085376
 GameObject:
   m_ObjectHideFlags: 0
@@ -838,6 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MousePosition: {x: 0, y: 0}
   CardPrefab: {fileID: 3112091163552550395, guid: 09d7b1c672807a644b3f3f4b59a9d4b4, type: 3}
+  SpecialCardPrefab: {fileID: 2310665415572990677, guid: ae7605940b9cecf4f82a3989c075ad83, type: 3}
   GameDeck:
   - {fileID: 11400000, guid: da571cdf6267d154081ad0ce30759351, type: 2}
   - {fileID: 11400000, guid: da571cdf6267d154081ad0ce30759351, type: 2}
@@ -855,10 +891,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: da571cdf6267d154081ad0ce30759351, type: 2}
   - {fileID: 11400000, guid: da571cdf6267d154081ad0ce30759351, type: 2}
   - {fileID: 11400000, guid: da571cdf6267d154081ad0ce30759351, type: 2}
-  SpecialDeck: []
+  SpecialDeck:
+  - {fileID: 11400000, guid: 87c637022d3615f4a910a07770019f70, type: 2}
+  - {fileID: 11400000, guid: 87c637022d3615f4a910a07770019f70, type: 2}
+  - {fileID: 11400000, guid: 87c637022d3615f4a910a07770019f70, type: 2}
+  - {fileID: 11400000, guid: 87c637022d3615f4a910a07770019f70, type: 2}
   hand: {fileID: 884547576}
+  specialHand: {fileID: 195173612}
   orderManager: {fileID: 778337518}
   handCards: []
+  specialHandCards: []
   SpiceSlider: {fileID: 8133271249478260934}
   SourSlider: {fileID: 446015594}
   SweetSlider: {fileID: 1245053845}
@@ -3723,6 +3765,7 @@ RectTransform:
   m_Children:
   - {fileID: 488044611}
   - {fileID: 884547577}
+  - {fileID: 195173613}
   - {fileID: 1855479789}
   - {fileID: 2120266388}
   - {fileID: 6863259826147925685}

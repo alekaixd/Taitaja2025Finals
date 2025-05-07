@@ -35,7 +35,9 @@ public class GameManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-
+        for (int i = 0; i < 3; i++) { 
+            AddSpecialCard(SpecialDeck[Random.Range(0, SpecialDeck.Count)]);
+        }
     }
     public void ResetFlavours()
     {
@@ -139,6 +141,9 @@ public class GameManager : MonoBehaviour
         cardDrag.defaultPosition = cardObject.transform.position;
         InteractableCardClass iCardClass = cardObject.GetComponent<InteractableCardClass>();
         iCardClass.SetFoodName(sCard.foodName);
+        iCardClass.flavour = sCard.flavourClass;
+        iCardClass.InitializeCard();
+        OrganizeSpecialHand();
     }
     void OrganiseHand()
     {
@@ -152,6 +157,24 @@ public class GameManager : MonoBehaviour
                 3 => 0f,
                 4 => cardGap,
                 5 => cardGap * 2,
+                _ => 0f
+            }, 0f, 0f);
+            card.transform.localPosition = newpos;
+            card.GetComponent<CardDrag>().defaultPosition = newpos;
+            currentCard += 1;
+        }
+    }
+
+    public void OrganizeSpecialHand()
+    {
+        int currentCard = 1;
+        foreach (GameObject card in specialHandCards)
+        {
+            Vector3 newpos = new Vector3(currentCard switch
+            {
+                1 => -cardGap,
+                2 => 0f,
+                3 => cardGap,
                 _ => 0f
             }, 0f, 0f);
             card.transform.localPosition = newpos;
