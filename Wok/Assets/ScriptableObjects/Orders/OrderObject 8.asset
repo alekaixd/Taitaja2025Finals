@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa76cc74198daa34ca7b90aeda8e6ec1, type: 3}
   m_Name: OrderObject 8
   m_EditorClassIdentifier: 
-  orderName: Spicy Focus
-  orderDescription: Give me a fiery wok dish, extra red chilies please.
+  orderName: Salty Only
+  orderDescription: Just a simple, salty wok preparation, please.
   orderRequirement:
   - flavor: 1
     flavourValue: 12

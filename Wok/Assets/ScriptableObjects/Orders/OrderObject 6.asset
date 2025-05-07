@@ -22,5 +22,5 @@ MonoBehaviour:
     flavourValue: 3
     isReversedRequirement: 0
   - flavor: 3
-    flavourValue: 0
+    flavourValue: 3
     isReversedRequirement: 1

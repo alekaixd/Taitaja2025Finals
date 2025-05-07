@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa76cc74198daa34ca7b90aeda8e6ec1, type: 3}
   m_Name: OrderObject 9
   m_EditorClassIdentifier: 
-  orderName: Spicy Focus
-  orderDescription: Give me a fiery wok dish, extra red chilies please.
+  orderName: Savoury Base
+  orderDescription: A deeply savoury wok dish please
   orderRequirement:
-  - flavor: 1
+  - flavor: 4
     flavourValue: 12
     isReversedRequirement: 0
