@@ -165,6 +165,11 @@ public class GameManager : MonoBehaviour
         }
         else if (Interractee.CompareTag("Card"))
         {
+            Debug.Log("Card Interract");
+            if (Interactor.CompareTag("S-Card"))
+            {
+
+            }
             draggedCard = null;
             draggingCard = false;
         }

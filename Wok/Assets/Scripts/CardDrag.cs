@@ -106,14 +106,15 @@ public class CardDrag : MonoBehaviour
 
     void OnMouseUp()
     {
-        if (gameManager.draggedCard != gameObject && isHovered && gameManager.draggingCard)
+
+        if (isHovered && gameManager.draggingCard && gameManager.draggedCard != null)
         {
+            Debug.Log("Card Interract");
             gameManager.CardInteract(gameManager.draggedCard, gameObject);
             gameManager.draggedCard = null;
         }
         isDragged = false;
         gameManager.draggingCard = false;
-        gameManager.draggedCard = null;
     }
     bool returningToDefaultPos;
 
